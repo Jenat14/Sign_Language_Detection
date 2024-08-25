@@ -1,3 +1,18 @@
+
+# To run the cloned file : 
+
+## 1. Create the Virtual Environment:
+
+``` python -m venv venv ```
+## 2. Activate the Virtual Environment:
+
+``` .\venv\Scripts\activate ```
+
+## 3. Install Dependencies:
+
+```pip install -r requirements.txt```
+
+
 # Things i did:
 ## 1. Create the Virtual Environment:
 
@@ -30,6 +45,6 @@
 * `README.md`: Project documentation.
 
 ## 5. Create a requirements.txt File:
-* Save your project dependencies to requirements.txt:
+Save your project dependencies to requirements.txt:
 
 ```pip freeze > requirements.txt```
