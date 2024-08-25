@@ -12,6 +12,10 @@
 
 ```pip install -r requirements.txt```
 
+<hr>
+<hr>
+<hr>
+
 
 # Things i did:
 ## 1. Create the Virtual Environment:
