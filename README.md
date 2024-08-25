@@ -7,12 +7,13 @@
 ## 2. Activate the Virtual Environment:
 
 ``` .\venv\Scripts\activate ```
-(If not working, try:
-```` 
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-.\venv\Scripts\activate 
+
+[ If not working, try:
 ```
-)
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\venv\Scripts\activate
+```
+]
 ## 3. Install Dependencies:
 
 ```pip install -r requirements.txt```
