@@ -20,7 +20,9 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## 4. Download the dataset
 
-Download the dataset from [Here](./data/coco_dataset.zip) and place it in the `data` directory.
+Download the dataset from
+<a href="./data/coco_dataset.zip" download="coco_dataset.zip">Here</a>
+ and place it in the `data` directory.
 
 <hr>
 <hr>
