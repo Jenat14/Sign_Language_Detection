@@ -62,3 +62,10 @@ Download the zip file of dataset from [here](./data) and place it in the `data` 
 Save your project dependencies to requirements.txt:
 
 ```pip freeze > requirements.txt```
+
+## 6. Installed COCO
+
+```pip install pycocotools```
+
+## 7. Imported the Dataset
+Zip file of dataset is added at the 'data' folder. Extract the dataset to use.
