@@ -1,5 +1,5 @@
 
-# To run the cloned file : 
+# To run the cloned file :
 
 ## 1. Create the Virtual Environment:
 
@@ -18,6 +18,10 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ```pip install -r requirements.txt```
 
+## 4. Download the dataset
+
+Download the zip file of dataset from [here](./data) and place it in the `data` directory.
+
 <hr>
 <hr>
 <hr>
@@ -33,13 +37,13 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## 3. Install Required Libraries:
 
-``` 
+```
     pip install opencv-python
     pip install tensorflow
     pip install scikit-learn
-    pip install flask 
+    pip install flask
     pip install numpy
-    pip install pandas 
+    pip install pandas
 ```
 
 ## 4. Folder Structure
