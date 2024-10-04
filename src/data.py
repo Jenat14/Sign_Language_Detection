@@ -22,7 +22,7 @@ def load_data():
     )
 
     val_generator = datagen.flow_from_directory(
-        './data/coco_dataset/train_classified',  # Use the same directory for validation
+        './data/coco_dataset/valid_classified',  # Use the same directory for validation
         target_size=(224, 224),
         batch_size=32,
         class_mode='categorical',
