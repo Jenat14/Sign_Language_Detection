@@ -1,6 +1,6 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
-from train import load_data  # Ensure this file exists and works properly
+from data import load_data  # Ensure this file exists and works properly
 
 def build_model():
     # Simple CNN model
@@ -33,8 +33,7 @@ def train_model():
         train_generator,
         validation_data=val_generator,
         epochs=10,  # Adjust as needed
-        steps_per_epoch=len(train_generator),
-        validation_steps=len(val_generator)
+        steps_per_epoch=train_generator.samples // train_generator.batch_size,
     )
 
     # Save the trained model to a file
