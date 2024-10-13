@@ -1,4 +1,5 @@
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras._tf_keras.keras.preprocessing.image import ImageDataGenerator
+
 
 def load_data():
     datagen = ImageDataGenerator(
