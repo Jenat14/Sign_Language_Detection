@@ -1,2 +1,4 @@
 venv
 coco_dataset/
+logs/
+*.tfevents.*
