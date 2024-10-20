@@ -2,3 +2,5 @@ venv
 coco_dataset/
 logs/
 *.tfevents.*
+__pycache__/
+*.pyc
