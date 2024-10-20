@@ -1,7 +1,7 @@
 import os
 import numpy as np  
 import shutil
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras._tf_keras.keras.preprocessing.image import ImageDataGenerator
 from PIL import Image
 
 def augment_and_save_images(class_dir, target_count, datagen):
@@ -32,18 +32,25 @@ def augment_and_save_images(class_dir, target_count, datagen):
         aug_image.save(aug_image_path)
 
 # Set up your directories
-train_directory = './data/coco_dataset/train_classified'
+train_directory = 'data/coco_dataset/valid_classified'
 
+# Find the largest class
 # Find the largest class
 class_sizes = {}
 for subdir, _, files in os.walk(train_directory):
     if subdir != train_directory:
         class_name = os.path.basename(subdir)
         image_files = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+        print(f"Class: {class_name}, Images found: {len(image_files)}")  # Debugging line
         class_sizes[class_name] = len(image_files)
 
-# Determine the target size (largest class size)
-max_size = max(class_sizes.values())
+if not class_sizes:
+    print("No classes or images were found.")
+else:
+    # Determine the target size (largest class size)
+    max_size = max(class_sizes.values())
+    print(f"Largest class size: {max_size}")
+
 
 # Create an ImageDataGenerator for augmentation
 datagen = ImageDataGenerator(
