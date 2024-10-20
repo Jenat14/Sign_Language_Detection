@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Language Detection</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { max-width: 600px; margin: auto; padding: 20px; }
-        input[type="file"] { margin: 20px 0; }
-        button { padding: 10px 15px; }
-        .result { margin-top: 20px; font-size: 1.2em; }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Language Detection</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
 <body>
     <div class="container">
         <h1>Sign Language Detection</h1>
-        <input type="file" id="fileInput" accept="image/*">
-        <button onclick="uploadFile()">Upload and Predict</button>
+        <!-- File input and upload button -->
+        <input type="file" id="fileInput" accept="image/*" onchange="previewImage()">
+        <!-- Image preview section -->
+        <div class="image-preview">
+            <img id="uploadedImage" src="" alt="Uploaded Image" width="200" height="200" style="display: none; justify-content: center;">
+        </div>
+        <button onclick="uploadFile()">Predict</button>
+        <!-- Result section -->
         <div class="result" id="result"></div>
     </div>
 
     <script>
+        // Function to display a preview of the uploaded image
+        function previewImage() {
+            const input = document.getElementById('fileInput');
+            const file = input.files[0];
+            const imagePreview = document.getElementById('uploadedImage');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Function to map the predicted class (0-25) to letters A-Z
+        function getLetterFromClass(predictedClass) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            return alphabet[predictedClass] || 'Unknown';
+        }
+
+        // Function to handle the file upload and prediction request
         async function uploadFile() {
             const input = document.getElementById('fileInput');
             const file = input.files[0];
@@ -40,10 +63,12 @@
 
             const result = await response.json();
             const resultDiv = document.getElementById('result');
+
             if (result.error) {
                 resultDiv.innerText = result.error;
             } else {
-                resultDiv.innerText = 'Predicted Class: ' + result.predicted_class;
+                const predictedLetter = getLetterFromClass(result.predicted_class);
+                resultDiv.innerText = 'Predicted Sign: ' + predictedLetter;
             }
         }
     </script>
