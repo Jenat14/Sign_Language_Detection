@@ -7,7 +7,7 @@ import io
 app = Flask(__name__)
 
 # Load your trained model
-model = load_model('asl_finetuned_model.h5')
+model = load_model('asl_optimized_model.h5')
 
 @app.route('/')
 def home():
