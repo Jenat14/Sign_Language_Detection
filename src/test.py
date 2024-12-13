@@ -15,7 +15,7 @@ test_datagen = ImageDataGenerator(rescale=1.0 / 255)
 
 # Load the test data (make sure you have a separate test dataset)
 test_generator = test_datagen.flow_from_directory(
-    './data/coco_dataset/valid_classified',  # Path to your test data
+    './data/coco_dataset/test_classified',  # Path to your test data
     target_size=(224, 224),
     batch_size=32,
     class_mode="categorical",  # Change to "binary" for binary classification
