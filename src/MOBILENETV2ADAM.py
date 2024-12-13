@@ -42,10 +42,8 @@ def load_data():
     return train_generator, val_generator
 
 def build_model(unfreeze_layers=50):
-    # Load MobileNetV2 with pre-trained weights
     base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
-    # Unfreeze specified number of layers
     for layer in base_model.layers[-unfreeze_layers:]:
         layer.trainable = True
 
@@ -58,10 +56,10 @@ def build_model(unfreeze_layers=50):
     x = GlobalAveragePooling2D()(x)
     x = BatchNormalization()(x)
     x = Dense(512, activation='relu')(x)
-    x = Dropout(0.4)(x)  # Adjusted dropout
+    x = Dropout(0.4)(x) 
     x = Dense(256, activation='relu')(x)
     x = Dropout(0.4)(x)  # Additional dropout layer
-    outputs = Dense(26, activation='softmax')(x)  # 26 classes for ASL alphabet
+    outputs = Dense(26, activation='softmax')(x)  
 
     model = Model(inputs=base_model.input, outputs=outputs)
 
@@ -74,7 +72,7 @@ def build_model(unfreeze_layers=50):
         staircase=True
     )
 
-    # Compile model with AdamW optimizer and learning rate schedule
+    
     model.compile(optimizer=Adam(learning_rate=lr_schedule),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
@@ -88,7 +86,6 @@ def train_model():
     # Build the CNN model
     model = build_model(unfreeze_layers=50)
 
-    # Callbacks: removed ReduceLROnPlateau since we're using ExponentialDecay
     early_stopping = EarlyStopping(monitor='val_loss', patience=5, verbose=1, restore_best_weights=True)
     tensorboard = TensorBoard(log_dir='./logs_optimized', histogram_freq=1)
 
