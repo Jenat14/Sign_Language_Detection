@@ -5,34 +5,32 @@ from keras._tf_keras.keras.models import Model
 from keras._tf_keras.keras.optimizers import SGD
 from keras._tf_keras.keras.callbacks import ReduceLROnPlateau, EarlyStopping, TensorBoard
 
-from data import load_data  # Ensure this file exists and works properly
+from data import load_data  
 
 def build_model(unfreeze=False):
-    # Load the base model with pre-trained weights from ImageNet
     base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
     if unfreeze:
-        # Optionally unfreeze the last few layers for fine-tuning
-        for layer in base_model.layers[-30:]:  # Unfreeze last 30 layers
+        for layer in base_model.layers[-30:]: 
             layer.trainable = True
     else:
-        # Freeze the entire base model initially
+        
         for layer in base_model.layers:
             layer.trainable = False
 
     # Add custom top layers
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
-    x = BatchNormalization()(x)  # Add batch normalization
+    x = BatchNormalization()(x)  
     x = Dense(512, activation='relu')(x)
-    x = Dropout(0.5)(x)  # Add dropout to prevent overfitting
-    outputs = Dense(26, activation='softmax')(x)  # 26 classes for sign language alphabet
+    x = Dropout(0.5)(x)  
+    outputs = Dense(26, activation='softmax')(x)  
 
     model = Model(inputs=base_model.input, outputs=outputs)
 
     # Compile the model with SGD optimizer with momentum
     model.compile(
-        optimizer=SGD(learning_rate=1e-4, momentum=0.9),  # Using SGD with momentum for stability
+        optimizer=SGD(learning_rate=1e-4, momentum=0.9), 
         loss='categorical_crossentropy',
         metrics=['accuracy']
     )
@@ -41,7 +39,6 @@ def build_model(unfreeze=False):
 
 # Train the model
 def train_model():
-    # Load the data (train_generator and val_generator must be returned by load_data)
     train_generator, val_generator = load_data()
 
     # Build the CNN model
